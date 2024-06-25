@@ -77,19 +77,11 @@ class PedidoController extends Controller
 
     foreach ($stocks as $cantidad) {
         // Verificar si existen los índices actuales en $id y $prov antes de usarlos
-        if (!isset($id[$contador]) || !isset($prov[$contador])) {
-            $contador++;
-            continue;
-        }
 
         // Obtener el proveedor
         $proveedor = proveedor::where('id', '=', $prov[$contador])->first();
 
-        // Si el proveedor es null, saltar a la siguiente iteración
-        if (is_null($proveedor)) {
-            $contador++;
-            continue;
-        }
+
 
         // Obtener el producto
         $producto = Producto::where('id', '=', $id[$contador])->first();

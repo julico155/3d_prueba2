@@ -76,7 +76,7 @@ class CompraController extends Controller
         $contador = 0;
         foreach ($com as $c) {
             $p = producto::where('id', $c->producto_id)->first();
-            $pro = Proveedor::where('id', $c->proveedor_id)->first();
+            $pro = proveedor::where('id', $c->proveedor_id)->first();
             $contador = $contador + 1;
             $compras[] = [
                 "fecha"    => $c->created_at,

@@ -22,7 +22,16 @@
                 </div>
             </form>
             <div id="loadingSpinner" class="mt-4 flex justify-center items-center" style="display: none;">
-                <div class="spinner"></div>
+                <div class="windows-spinner">
+                    <div class="spinner-circle"></div>
+                    <div class="spinner-circle"></div>
+                    <div class="spinner-circle"></div>
+                    <div class="spinner-circle"></div>
+                    <div class="spinner-circle"></div>
+                    <div class="spinner-circle"></div>
+                    <div class="spinner-circle"></div>
+                    <div class="spinner-circle"></div>
+                </div>
             </div>
             <div class="mt-8">
                 <h2 class="text-xl font-bold mb-4">Imagen Generada</h2>
@@ -42,27 +51,63 @@
     </div>
 
     <style>
-        .spinner {
+        .windows-spinner {
             width: 50px;
             height: 50px;
-            border: 8px solid rgba(0, 0, 0, 0.1);
-            border-top-color: #3498db;
+            position: relative;
+        }
+
+        .spinner-circle {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            background-color: transparent;
+            border: 4px solid #3498db;
+            border-top-color: transparent;
             border-radius: 50%;
-            animation: spin 1s linear infinite, move 1s ease-in-out infinite;
+            animation: spin 1.2s linear infinite;
+        }
+
+        .spinner-circle:nth-child(1) {
+            animation-delay: -1.1s;
+        }
+
+        .spinner-circle:nth-child(2) {
+            animation-delay: -1.0s;
+        }
+
+        .spinner-circle:nth-child(3) {
+            animation-delay: -0.9s;
+        }
+
+        .spinner-circle:nth-child(4) {
+            animation-delay: -0.8s;
+        }
+
+        .spinner-circle:nth-child(5) {
+            animation-delay: -0.7s;
+        }
+
+        .spinner-circle:nth-child(6) {
+            animation-delay: -0.6s;
+        }
+
+        .spinner-circle:nth-child(7) {
+            animation-delay: -0.5s;
+        }
+
+        .spinner-circle:nth-child(8) {
+            animation-delay: -0.4s;
         }
 
         @keyframes spin {
-            to {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
                 transform: rotate(360deg);
-            }
-        }
-
-        @keyframes move {
-            0%, 100% {
-                transform: translateX(0);
-            }
-            50% {
-                transform: translateX(10px);
             }
         }
     </style>

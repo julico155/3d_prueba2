@@ -21,11 +21,8 @@
                     </a>
                 </div>
             </form>
-            <div id="loadingSpinner" class="mt-4" style="display: none;">
-                <svg class="animate-spin h-5 w-5 text-gray-500 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
-                </svg>
+            <div id="loadingSpinner" class="mt-4 flex justify-center items-center" style="display: none;">
+                <div class="spinner"></div>
             </div>
             <div class="mt-8">
                 <h2 class="text-xl font-bold mb-4">Imagen Generada</h2>
@@ -44,10 +41,36 @@
         </div>
     </div>
 
+    <style>
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 8px solid rgba(0, 0, 0, 0.1);
+            border-top-color: #3498db;
+            border-radius: 50%;
+            animation: spin 1s linear infinite, move 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes move {
+            0%, 100% {
+                transform: translateX(0);
+            }
+            50% {
+                transform: translateX(10px);
+            }
+        }
+    </style>
+
     <script>
         document.getElementById('iaForm').addEventListener('submit', function(event) {
             event.preventDefault();
-            document.getElementById('loadingSpinner').style.display = 'block';
+            document.getElementById('loadingSpinner').style.display = 'flex';
             const prompt = document.getElementById('prompt').value;
             const producto_id = document.getElementById('producto_id').value;
 

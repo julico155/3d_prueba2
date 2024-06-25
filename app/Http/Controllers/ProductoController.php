@@ -134,18 +134,14 @@ class ProductoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(producto $producto)
+    public function edit(Producto $producto)
     {
-        $categorias = categoria::get();
-        $marcas = marca::get();
-        $p = producto::find($producto->id);
-        $color = color::all();
-        return view('VistaProductos.edit', compact('p', 'categorias','marcas','color'));
+        $categorias = Categoria::get();
+        $marcas = Marca::get();
+        $color = Color::all();
+        return view('VistaProductos.edit', compact('producto', 'categorias', 'marcas', 'color'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Producto $producto)
     {
         $producto->nombre = $request->nombre;
@@ -154,8 +150,55 @@ class ProductoController extends Controller
         $producto->categoria_id = $request->categoria;
         $producto->color_id = $request->color;
         $producto->stock_min = $request->stock_min;
+        $producto->es_3d = $request->has('es_3d');
+        $producto->es_formato_obj = $request->has('es_formato_obj');
+        $producto->es_formato_gltf = $request->has('es_formato_gltf');
+        $producto->es_formato_fbx = $request->has('es_formato_fbx');
+        $producto->es_formato_stl = $request->has('es_formato_stl');
+        $producto->descripcion_3d = $request->descripcion_3d;
+        $producto->precio_3d = $request->precio_3d;
+
+        // Manejar carga de archivos 3D
+        if ($request->hasFile('archivo_3d')) {
+            $archivo = $request->file('archivo_3d');
+            $archivoNombre = time() . '-' . $archivo->getClientOriginalName();
+            $path = $archivo->storeAs('public/models', $archivoNombre);
+            $producto->archivo_3d = 'models/' . $archivoNombre;
+        }
+
+        // Manejar carga de archivo ZIP
+        if ($request->hasFile('zip_path')) {
+            $zip = $request->file('zip_path');
+            $zipNombre = time() . '-' . $zip->getClientOriginalName();
+            $path = $zip->storeAs('public/zip', $zipNombre);
+            $producto->zip_path = 'zip/' . $zipNombre;
+        }
+
+        // Manejar carga de imágenes
+        if ($request->hasFile('fotos')) {
+            $destino = 'public/img/fotosProductos/';
+            $files = $request->file('fotos');
+            foreach ($files as $key => $file) {
+                $fotoNombre = time() . '-' . $file->getClientOriginalName();
+                $path = $file->storeAs($destino, $fotoNombre);
+                $producto->{'imagen'.($key+1)} = 'img/fotosProductos/' . $fotoNombre;
+            }
+        }
+
+        // Manejar carga de video
+        if ($request->hasFile('video')) {
+            $video = $request->file('video');
+            $videoNombre = time() . '-' . $video->getClientOriginalName();
+            $path = $video->storeAs('public/videos', $videoNombre);
+            $producto->video = 'videos/' . $videoNombre;
+        }
+
         $producto->save();
-    
+
+        activity()
+            ->causedBy(auth()->user())
+            ->log('Se actualizó el producto: ' . $producto->nombre);
+
         return redirect()->route('producto.index')->with('success', 'Producto actualizado exitosamente.');
     }
     

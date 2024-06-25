@@ -14,13 +14,8 @@
             </a>
         </div>
         <div class="mt-4 sm:ml-4">
-            <a href="{{ route('talla.index') }}" class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition duration-300 ease-in-out">
-                Tallas
-            </a>
-        </div>
-        <div class="mt-4 sm:ml-4">
             <a href="{{ route('color.index') }}" class="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded-md transition duration-300 ease-in-out">
-                Colores
+                Materiales
             </a>
         </div>
     </div>
@@ -28,7 +23,7 @@
 
 <div class="grid grid-cols-2 gap-6">
     <div class="w-full lg:w-3/4 mx-auto mb-4">
-        <h2 class="text-2xl font-bold text-black my-4 ml-4">Colores</h2>
+        <h2 class="text-2xl font-bold text-black my-4 ml-4">Materiales</h2>
         <form action="{{ route('color.store') }}" method="POST" enctype="multipart/form-data" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
             @csrf
                 <div class="mb-4">

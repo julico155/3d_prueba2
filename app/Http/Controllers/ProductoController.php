@@ -37,10 +37,10 @@ class ProductoController extends Controller
     {
         $categorias = categoria::get();
         $marcas = marca::get();
-        $tallas = Talla::all();
+        
         $colores = color::all();
         // dd($categorias->isEmpty());
-        return view('VistaProductos.create', compact('categorias','marcas','tallas','colores'));
+        return view('VistaProductos.create', compact('categorias','marcas','colores'));
     }
 
     /**

@@ -76,13 +76,19 @@ class PedidoController extends Controller
         foreach ($stocks as $cantidad) {
             // dd($id[$contador]);
             $proveedor = proveedor::where('id','=',$prov[$contador])->first();
+
+            if (is_null($proveedor)) {
+                $contador++;
+                continue;
+            }
+            
             $producto = Producto::where('id','=',$id[$contador])->first();
             if($cantidad > 0){
             $detallecompra = DetalleCompra::create([
                 'compra_id' => $compra->id,
                 'producto_id' => $producto->id,
                 'cantidad'  => $cantidad,
-                'proveedor_id' => $proveedor ? $proveedor->id : null
+                'proveedor_id' => $proveedor->id
         ]);
 
             $detallecompra->save();

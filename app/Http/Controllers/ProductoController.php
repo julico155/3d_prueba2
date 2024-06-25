@@ -218,7 +218,6 @@ class ProductoController extends Controller
     {
         $categorias = Categoria::all();
     $colores = Color::all();
-    $tallas = Talla::all();
         $productos = Producto::query();
 
         if ($request->has('categoria')) {
@@ -229,14 +228,12 @@ class ProductoController extends Controller
             $productos->where('color_id', $request->color);
         }
 
-        if ($request->has('talla')) {
-            $productos->where('talla_id', $request->talla);
-        }
+
 
         $productos = $productos->get();
 
         // Otras lógicas, como obtener las categorías, colores y tallas para los filtros
 
-        return view('ver-productos', compact('productos', 'categorias', 'colores', 'tallas'));
+        return view('ver-productos', compact('productos', 'categorias', 'colores'));
     }
 }

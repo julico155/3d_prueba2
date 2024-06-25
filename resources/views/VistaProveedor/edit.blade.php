@@ -26,7 +26,7 @@
                     <select name="marca" id="marca" required class="border border-gray-400 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-green-500">
                         <option disabled>Elige una categoría</option>
                         @forelse ($marcas as $c)
-                            <option value="{{ $c->id }}" {{ $p->marca_id == $c->id ? 'selected' : '' }}>{{ $c->categoria }}</option>
+                            <option value="{{ $c->id }}" {{ $p->categoria_id == $c->id ? 'selected' : '' }}>{{ $c->categoria }}</option>
                         @empty
                             <option disabled>Registra una nueva categoría</option>
                         @endforelse

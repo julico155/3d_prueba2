@@ -22,15 +22,19 @@
                 </div>
             </form>
             <div id="loadingSpinner" class="mt-4 flex justify-center items-center" style="display: none;">
-                <div class="windows-spinner">
-                    <div class="spinner-circle"></div>
-                    <div class="spinner-circle"></div>
-                    <div class="spinner-circle"></div>
-                    <div class="spinner-circle"></div>
-                    <div class="spinner-circle"></div>
-                    <div class="spinner-circle"></div>
-                    <div class="spinner-circle"></div>
-                    <div class="spinner-circle"></div>
+                <div class="lds-spinner">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
                 </div>
             </div>
             <div class="mt-8">
@@ -51,63 +55,82 @@
     </div>
 
     <style>
-        .windows-spinner {
-            width: 50px;
-            height: 50px;
+        .lds-spinner {
+            color: official;
+            display: inline-block;
             position: relative;
+            width: 80px;
+            height: 80px;
         }
-
-        .spinner-circle {
-            width: 100%;
-            height: 100%;
+        .lds-spinner div {
+            transform-origin: 40px 40px;
+            animation: lds-spinner 1.2s linear infinite;
+        }
+        .lds-spinner div:after {
+            content: " ";
+            display: block;
             position: absolute;
-            left: 0;
-            top: 0;
-            background-color: transparent;
-            border: 4px solid #3498db;
-            border-top-color: transparent;
-            border-radius: 50%;
-            animation: spin 1.2s linear infinite;
+            top: 3px;
+            left: 37px;
+            width: 6px;
+            height: 18px;
+            border-radius: 20%;
+            background: #3498db;
         }
-
-        .spinner-circle:nth-child(1) {
+        .lds-spinner div:nth-child(1) {
+            transform: rotate(0deg);
             animation-delay: -1.1s;
         }
-
-        .spinner-circle:nth-child(2) {
-            animation-delay: -1.0s;
+        .lds-spinner div:nth-child(2) {
+            transform: rotate(30deg);
+            animation-delay: -1s;
         }
-
-        .spinner-circle:nth-child(3) {
+        .lds-spinner div:nth-child(3) {
+            transform: rotate(60deg);
             animation-delay: -0.9s;
         }
-
-        .spinner-circle:nth-child(4) {
+        .lds-spinner div:nth-child(4) {
+            transform: rotate(90deg);
             animation-delay: -0.8s;
         }
-
-        .spinner-circle:nth-child(5) {
+        .lds-spinner div:nth-child(5) {
+            transform: rotate(120deg);
             animation-delay: -0.7s;
         }
-
-        .spinner-circle:nth-child(6) {
+        .lds-spinner div:nth-child(6) {
+            transform: rotate(150deg);
             animation-delay: -0.6s;
         }
-
-        .spinner-circle:nth-child(7) {
+        .lds-spinner div:nth-child(7) {
+            transform: rotate(180deg);
             animation-delay: -0.5s;
         }
-
-        .spinner-circle:nth-child(8) {
+        .lds-spinner div:nth-child(8) {
+            transform: rotate(210deg);
             animation-delay: -0.4s;
         }
-
-        @keyframes spin {
+        .lds-spinner div:nth-child(9) {
+            transform: rotate(240deg);
+            animation-delay: -0.3s;
+        }
+        .lds-spinner div:nth-child(10) {
+            transform: rotate(270deg);
+            animation-delay: -0.2s;
+        }
+        .lds-spinner div:nth-child(11) {
+            transform: rotate(300deg);
+            animation-delay: -0.1s;
+        }
+        .lds-spinner div:nth-child(12) {
+            transform: rotate(330deg);
+            animation-delay: 0s;
+        }
+        @keyframes lds-spinner {
             0% {
-                transform: rotate(0deg);
+                opacity: 1;
             }
             100% {
-                transform: rotate(360deg);
+                opacity: 0;
             }
         }
     </style>

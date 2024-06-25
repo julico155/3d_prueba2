@@ -75,7 +75,7 @@ class PedidoController extends Controller
         $contador = 0;
         foreach ($stocks as $cantidad) {
             // dd($id[$contador]);
-            dd($prov[$contador]);
+            
             $proveedor = proveedor::where('id','=',$prov[$contador])->first();
 
             if (is_null($proveedor)) {

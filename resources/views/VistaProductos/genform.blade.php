@@ -21,6 +21,12 @@
                     </a>
                 </div>
             </form>
+            <div id="loadingSpinner" class="mt-4" style="display: none;">
+                <svg class="animate-spin h-5 w-5 text-gray-500 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+                </svg>
+            </div>
             <div class="mt-8">
                 <h2 class="text-xl font-bold mb-4">Imagen Generada</h2>
                 <canvas id="imageCanvas" class="border rounded-lg"></canvas>
@@ -35,13 +41,13 @@
                     </button>
                 </form>
             </div>
-
         </div>
     </div>
 
     <script>
         document.getElementById('iaForm').addEventListener('submit', function(event) {
             event.preventDefault();
+            document.getElementById('loadingSpinner').style.display = 'block';
             const prompt = document.getElementById('prompt').value;
             const producto_id = document.getElementById('producto_id').value;
 
@@ -55,6 +61,7 @@
             })
             .then(response => response.json())
             .then(data => {
+                document.getElementById('loadingSpinner').style.display = 'none';
                 if (data.success) {
                     const canvas = document.getElementById('imageCanvas');
                     const ctx = canvas.getContext('2d');
@@ -72,6 +79,7 @@
                 }
             })
             .catch(error => {
+                document.getElementById('loadingSpinner').style.display = 'none';
                 console.error('Error:', error);
                 alert('Error generando la imagen con IA.');
             });

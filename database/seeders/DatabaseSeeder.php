@@ -30,7 +30,6 @@ class DatabaseSeeder extends Seeder
 
         $this->roles();
         $this->cargarUsuarios();
-        $this->cargarTalla();
         $this->cargarCategoria();
         $this->cargarColores();
     }

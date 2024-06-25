@@ -9,11 +9,6 @@
             </a>
         </div>
         <div class="mt-4 sm:ml-4">
-            <a href="{{ route('marca.index') }}" class="bg-teal-500 hover:bg-teal-700 text-white px-4 py-2 rounded-md transition duration-300 ease-in-out">
-                Marcas
-            </a>
-        </div>
-        <div class="mt-4 sm:ml-4">
             <a href="{{ route('producto.index') }}" class="bg-orange-500 hover:bg-orange-700 text-white px-4 py-2 rounded-md transition duration-300 ease-in-out">
                 Productos
             </a>

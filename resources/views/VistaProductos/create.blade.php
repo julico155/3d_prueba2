@@ -45,7 +45,7 @@
                                 <label for="color" class="text-gray-600 font-semibold text-sm">Material:</label>
                                 <select name="color" id="color"
                                     class="border border-gray-400 rounded-lg w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:border-green-500">
-                                    <option selected disabled>Elige un color</option>
+                                    <option selected disabled>Elige un material</option>
                                     @forelse ($colores as $c)
                                         <option value="{{ $c->id }}">{{ $c->nombre }}</option>
                                     @empty

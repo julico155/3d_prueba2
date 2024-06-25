@@ -160,7 +160,7 @@
                     <p class="text-gray-600">{{ $p->descripcion }}</p>
                     
                     @auth
-                        @if($p->stock < 1)
+                        @if($p->stock > 0)
                         <form action="{{ route('carrito.update', $p->id) }}" method="post">
                             @method('PUT')
                             @csrf
@@ -257,7 +257,7 @@
             interval: 2000 // Ajusta este valor para cambiar la velocidad (2000 ms = 2 segundos)
         });
     });
-    
+
     document.addEventListener('DOMContentLoaded', function () {
         $('#model3DModal').on('shown.bs.modal', function () {
             const canvas = document.getElementById('renderCanvas');

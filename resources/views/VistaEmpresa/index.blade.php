@@ -30,7 +30,7 @@
                             <div class="ml-4">
                                 <h2 class="text-lg font-bold">{{ $producto->nombre }}</h2>
                                 <p class="text-xs font-semibold mb-2">Cantidad: {{ $producto->cantidad }}</p>
-                                <p class="mb-2">{{  \Illuminate\Support\Str::limit($producto->descripcion, 15) }}</p>
+                                <p class="mb-2">{{ $producto->descripcion }}</p>
                                 <p class="text-lg font-semibold">Precio: {{ $producto->precio }}</p>
                             </div>
                         </div>

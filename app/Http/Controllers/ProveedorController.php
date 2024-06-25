@@ -74,7 +74,7 @@ class ProveedorController extends Controller
         //
         $p = proveedor::find($id);
         $marcas = categoria::get();
-        return view('vistaproveedor.edit', compact('p','marcas'));
+        return view('VistaProveedor.edit', compact('p','marcas'));
     }
 
     /**

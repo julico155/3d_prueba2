@@ -15,6 +15,84 @@
             width: 100%;
             height: 100%;
         }
+        .lds-spinner {
+            color: official;
+            display: inline-block;
+            position: relative;
+            width: 80px;
+            height: 80px;
+        }
+        .lds-spinner div {
+            transform-origin: 40px 40px;
+            animation: lds-spinner 1.2s linear infinite;
+        }
+        .lds-spinner div:after {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 3px;
+            left: 37px;
+            width: 6px;
+            height: 18px;
+            border-radius: 20%;
+            background: #3498db;
+        }
+        .lds-spinner div:nth-child(1) {
+            transform: rotate(0deg);
+            animation-delay: -1.1s;
+        }
+        .lds-spinner div:nth-child(2) {
+            transform: rotate(30deg);
+            animation-delay: -1s;
+        }
+        .lds-spinner div:nth-child(3) {
+            transform: rotate(60deg);
+            animation-delay: -0.9s;
+        }
+        .lds-spinner div:nth-child(4) {
+            transform: rotate(90deg);
+            animation-delay: -0.8s;
+        }
+        .lds-spinner div:nth-child(5) {
+            transform: rotate(120deg);
+            animation-delay: -0.7s;
+        }
+        .lds-spinner div:nth-child(6) {
+            transform: rotate(150deg);
+            animation-delay: -0.6s;
+        }
+        .lds-spinner div:nth-child(7) {
+            transform: rotate(180deg);
+            animation-delay: -0.5s;
+        }
+        .lds-spinner div:nth-child(8) {
+            transform: rotate(210deg);
+            animation-delay: -0.4s;
+        }
+        .lds-spinner div:nth-child(9) {
+            transform: rotate(240deg);
+            animation-delay: -0.3s;
+        }
+        .lds-spinner div:nth-child(10) {
+            transform: rotate(270deg);
+            animation-delay: -0.2s;
+        }
+        .lds-spinner div:nth-child(11) {
+            transform: rotate(300deg);
+            animation-delay: -0.1s;
+        }
+        .lds-spinner div:nth-child(12) {
+            transform: rotate(330deg);
+            animation-delay: 0s;
+        }
+        @keyframes lds-spinner {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
     </style>
     <!-- Agregar en la cabecera de tu plantilla principal si Bootstrap no está incluido -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -141,7 +219,23 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <canvas id="renderCanvas"></canvas>
+                    <div id="loadingSpinner" class="flex justify-center items-center" style="display: none;">
+                        <div class="lds-spinner">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </div>
+                    <canvas id="renderCanvas" style="display: none;"></canvas>
                 </div>
             </div>
         </div>
@@ -152,10 +246,15 @@
     document.addEventListener('DOMContentLoaded', function () {
         $('#model3DModal').on('shown.bs.modal', function () {
             const canvas = document.getElementById('renderCanvas');
-            if (!canvas) {
-                console.error('3D canvas not found');
+            const loadingSpinner = document.getElementById('loadingSpinner');
+            if (!canvas || !loadingSpinner) {
+                console.error('3D canvas or spinner not found');
                 return;
             }
+
+            // Mostrar el spinner
+            loadingSpinner.style.display = 'flex';
+            canvas.style.display = 'none';
 
             // Crear el engine y la escena
             const engine = new BABYLON.Engine(canvas, true);
@@ -171,12 +270,17 @@
             // Cargar el modelo
             const modelPath = `{{ asset('storage/' . $p->archivo_3d) }}`;
             BABYLON.SceneLoader.Append("", modelPath, scene, function (scene) {
-                // El modelo se ha cargado correctamente
+                // Ocultar el spinner y mostrar el canvas cuando el modelo se haya cargado
+                loadingSpinner.style.display = 'none';
+                canvas.style.display = 'block';
+                
                 engine.runRenderLoop(function () {
                     scene.render();
                 });
             }, null, function (scene, message) {
                 console.error('Error loading model:', message);
+                // Ocultar el spinner incluso si hay un error
+                loadingSpinner.style.display = 'none';
             });
 
             // Ajustar el tamaño del canvas al cambiar el tamaño de la ventana

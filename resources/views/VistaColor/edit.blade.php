@@ -2,7 +2,7 @@
 
 @section('producto')
 <div class="w-full lg:w-1/2 mx-auto my-4">
-    <h2 class="text-2xl font-bold text-black mt-8 mb-4 ml-4 uppercase">Actualizar Material:</h2>
+    <h2 class="text-2xl font-bold text-black mt-8 mb-4 ml-4 uppercase">Actualizar Color:</h2>
     <form action="{{ route('color.update', $color->id) }}" method="POST" enctype="multipart/form-data" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
         @csrf
         @method('PUT')

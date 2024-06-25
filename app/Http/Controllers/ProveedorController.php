@@ -46,14 +46,14 @@ class ProveedorController extends Controller
     public function store(Request $request)
     {
         $p = new proveedor();
-        $p->nombre = $request->nombre;
-        $p->telefono = $request->telefono;
+        $p->Nombre = $request->nombre;
+        $p->Telefono = $request->telefono;
         $p->categoria_id = $request->marca;
         $p->save();
 
         activity()
     ->causedBy(auth()->user()) // El usuario responsable de la actividad
-    ->log('Se creo un proveedor : ' . $p->nombre);
+    ->log('Se creo un proveedor : ' . $p->Nombre);
         return redirect()->route('proveedor.index');
 
     }

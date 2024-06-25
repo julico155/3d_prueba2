@@ -136,7 +136,7 @@ class ProductoController extends Controller
      */
     public function edit(Producto $producto)
     {
-        $p = $producto;
+        $p = $producto; 
         $categorias = Categoria::get();
         $marcas = Marca::get();
         $color = Color::all();

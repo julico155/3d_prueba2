@@ -210,7 +210,7 @@
 
     <!-- Modal for 3D Model Viewing -->
     <div class="modal fade" id="model3DModal" tabindex="-1" role="dialog" aria-labelledby="model3DModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="model3DModalLabel">Modelo 3D</h5>
@@ -261,7 +261,7 @@
             const scene = new BABYLON.Scene(engine);
 
             // Crear la cámara
-            const camera = new BABYLON.ArcRotateCamera("camera", Math.PI / 2, Math.PI / 2, 2, new BABYLON.Vector3(0, 0, 0), scene);
+            const camera = new BABYLON.ArcRotateCamera("camera", Math.PI / 2, Math.PI / 2, 4, new BABYLON.Vector3(0, 0, 0), scene);
             camera.attachControl(canvas, true);
 
             // Crear la luz

@@ -63,50 +63,63 @@ class PedidoController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        // dd($request);
-        $compra = Compra::create([
-            // Agregar los atributos de la compra
-        ]);
-        $compra->save();
-        $stocks = $request->input('stock');
-        $id = $request->input('id_producto');
-        $prov = $request->input('proveedor');
-        $contador = 0;
-        foreach ($stocks as $cantidad) {
-            // dd($id[$contador]);
-            
-            $proveedor = proveedor::where('id','=',$prov[$contador])->first();
+{
+    // dd($request);
+    $compra = Compra::create([
+        // Agregar los atributos de la compra
+    ]);
+    $compra->save();
+    
+    $stocks = $request->input('stock');
+    $id = $request->input('id_producto');
+    $prov = $request->input('proveedor');
+    $contador = 0;
 
-            if (is_null($proveedor)) {
-                $contador++;
-                continue;
-            }
+    foreach ($stocks as $cantidad) {
+        // Verificar si existen los índices actuales en $id y $prov antes de usarlos
+        if (!isset($id[$contador]) || !isset($prov[$contador])) {
+            $contador++;
+            continue;
+        }
 
-            $producto = Producto::where('id','=',$id[$contador])->first();
-            if($cantidad > 0){
+        // Obtener el proveedor
+        $proveedor = proveedor::where('id', '=', $prov[$contador])->first();
+
+        // Si el proveedor es null, saltar a la siguiente iteración
+        if (is_null($proveedor)) {
+            $contador++;
+            continue;
+        }
+
+        // Obtener el producto
+        $producto = Producto::where('id', '=', $id[$contador])->first();
+
+        // Si la cantidad es mayor que 0, crear el detalle de compra
+        if ($cantidad > 0) {
             $detallecompra = DetalleCompra::create([
                 'compra_id' => $compra->id,
                 'producto_id' => $producto->id,
                 'cantidad'  => $cantidad,
                 'proveedor_id' => $proveedor->id
-        ]);
+            ]);
 
             $detallecompra->save();
         }
-            $producto->stock += $cantidad;
-            // dd($producto);
-            $producto->save();
-            $contador++;
-        }
-        activity()
-            ->causedBy(auth()->user()) // El usuario responsable de la actividad
-            ->log('Se realizo un pedido de compra al proveedor ' );
-        // Aquí puedes realizar otras acciones relacionadas con el pedido,
-        // como almacenar la información en la base de datos, enviar notificaciones, etc.
 
-        return redirect()->route('compra.index')->with('success', 'Pedido solicitado correctamente.');
+        // Actualizar el stock del producto
+        $producto->stock += $cantidad;
+        $producto->save();
+
+        $contador++;
     }
+
+    activity()
+        ->causedBy(auth()->user()) // El usuario responsable de la actividad
+        ->log('Se realizó un pedido de compra al proveedor.');
+
+    return redirect()->route('compra.index')->with('success', 'Pedido solicitado correctamente.');
+}
+
 
     /**
      * Display the specified resource.

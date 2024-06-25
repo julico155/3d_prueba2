@@ -57,7 +57,7 @@
                                 <td class="py-2 text-center">{{ $p['producto_stock'] }}</td>
                                 <td class="py-2 text-center">{{ $p['producto_stock_min'] }}</td>
                                 <td class="py-2 text-center">
-                                    <input type="number" name="stock[]" class="w-20 px-2 py-1" placeholder="0">
+                                    <input type="number" name="stock[]" class="w-20 px-2 py-1" value="0">
                                     <input type="number" name="id_producto[]" class="hidden" value="{{$p['producto_id']}}">
                                     <input type="text" name="nombre_proveedor[]" class="hidden" value="{{$p['proveedor']}}">
                                 </td>

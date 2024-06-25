@@ -16,7 +16,7 @@
                     <h2 class="text-2xl font-bold mb-4">Nota de Compra</h2>
 
                     <div class="bg-white shadow-md rounded px-8 py-6 mb-4">
-                        <p class="text-gray-700"><strong>JLY COMPANY</strong></p>
+                        <p class="text-gray-700"><strong>RefracGas</strong></p>
                         <p class="text-gray-700"><strong>Fecha:</strong> {{ Carbon::parse($compras[0]['fecha'])->format('d/m/Y') }}
                         </p>
 

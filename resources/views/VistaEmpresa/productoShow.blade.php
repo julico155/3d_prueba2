@@ -76,8 +76,9 @@
                     <h3 class="text-2x2 font-medium text-gray-800">BOB. {{ $p->precio }}</h3>
                     <p class="text-sm text-gray-600">Cantidad disponible: {{ $p->stock }}</p>
                     <p class="text-gray-600">{{ $p->descripcion }}</p>
-
+                    
                     @auth
+                        @if($p->stock < 1)
                         <form action="{{ route('carrito.update', $p->id) }}" method="post">
                             @method('PUT')
                             @csrf
@@ -89,6 +90,9 @@
                                 <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded-r-md hover:bg-green-600 transition duration-300">Agregar al Carrito</button>
                             </div>
                         </form>
+                        @else
+                        <h3 class="text-2x2 font-medium text-gray-800">No hay Stock</h3>
+                        @endif
                         <!-- Botón para abrir el modal, con ruta del modelo 3D -->
                         
                         @if ($p->es_3d)

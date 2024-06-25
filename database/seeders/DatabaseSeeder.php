@@ -201,20 +201,15 @@ class DatabaseSeeder extends Seeder
         $talla->save();
 
     }
+
+    
     public function cargarColores(){
         //Colores de la prenda
-        color::create(['nombre' => 'Negro']);
-        color::create(['nombre' => 'Blanco']);
-        color::create(['nombre' => 'Azul']);
-        color::create(['nombre' => 'Rojo']);
-        color::create(['nombre' => 'Verde']);
-        color::create(['nombre' => 'Amarillo']);
-        color::create(['nombre' => 'Celeste']);
-        color::create(['nombre' => 'Rosado']);
-        color::create(['nombre' => 'Plomo']);
-        color::create(['nombre' => 'Cafe']);
-        color::create(['nombre' => 'Naranja']);
-        color::create(['nombre' => 'Lila']);
+        color::create(['nombre' => 'Hierro fundido']);
+        color::create(['nombre' => 'Acero Inoxidable']);
+        color::create(['nombre' => 'Alumnio']);
+        color::create(['nombre' => 'Hierro']);
+        color::create(['nombre' => 'Cobre']);
     }
     public function cargarCategoria(){
 

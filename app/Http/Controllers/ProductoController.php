@@ -11,6 +11,7 @@ use App\Models\stock;
 use App\Models\Talla; 
 use Illuminate\Http\Request;
 use ZipArchive;
+use Illuminate\Support\Str;
 class ProductoController extends Controller
 {
     /**
@@ -23,6 +24,9 @@ class ProductoController extends Controller
         $e = User::find($id);
         $p = producto::where('id_propietario', $e->id)->get();
         $categorias = categoria::get();
+        foreach ($productos as $producto) {
+            $producto->descripcion_limitada = Str::limit($producto->descripcion, 15);
+        }
 
         return view('VistaProductos.index', compact('productos', 'e', 'p', 'categorias'));
         

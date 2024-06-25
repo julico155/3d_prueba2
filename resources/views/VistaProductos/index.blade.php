@@ -40,7 +40,7 @@
                             <div class="ml-4">
                                 <h2 class="text-lg font-bold">{{ $producto->nombre }}</h2>
                                 <p class="mb-2">Stock: {{ $producto->stock }}</p>
-                                <p class="mb-2">{{  \Illuminate\Support\Str::limit($producto->descripcion, 15) }}</p>
+                                <p class="mb-2">{{ $producto->descripcion_limitada }}</p>
                                 <p class="text-lg font-semibold">Precio: {{ $producto->precio }}</p>
                                 <div class="flex items-center">
                                     <form action="{{ route('producto.destroy', $producto->id) }}" method="POST" class="inline-block">

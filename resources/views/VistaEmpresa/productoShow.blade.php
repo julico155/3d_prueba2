@@ -116,7 +116,7 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8">
                 <!-- Carrusel de imágenes y video -->
                 <div>
-                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="2000">
                         <ol class="carousel-indicators">
                             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
                             <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -151,6 +151,7 @@
                         </a>
                     </div>
                 </div>
+                
 
                 <div class="space-y-4">
                     <h3 class="text-2xl font-medium text-gray-800">{{ $p->nombre }}</h3>
@@ -251,6 +252,12 @@
 @endsection
 
 <script>
+    $(document).ready(function(){
+        $('#carouselExampleIndicators').carousel({
+            interval: 2000 // Ajusta este valor para cambiar la velocidad (2000 ms = 2 segundos)
+        });
+    });
+    
     document.addEventListener('DOMContentLoaded', function () {
         $('#model3DModal').on('shown.bs.modal', function () {
             const canvas = document.getElementById('renderCanvas');

@@ -5,6 +5,7 @@
     <div class="bg-white shadow-md rounded-lg p-6 lg:p-12">
         <h2 class="text-3xl text-black font-bold mb-6">Carrito de Compras</h2>
 
+        @if (count($detalle_carrito) > 0)
         <div class="w-full sm:w-3/4">
             <table class="min-w-full divide-y divide-gray-200">
                 <thead>
@@ -74,6 +75,9 @@
                 </script>
             <div class="text-2xl font-semibold">Total: BOB {{ $carrito->total }}</div>
         </div>
+        @else
+        <p>No hay productos en el carrito.</p>
+        @endif
     </div>
     <div class="border-t my-4">
         <h2 class="text-2xl font-semibold text-black mt-8 mb-4 ml-4 uppercase">Encuentra mas Productos: </h2>

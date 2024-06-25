@@ -108,8 +108,8 @@
     <div class="container mx-auto mt-8">
         <div class="bg-white shadow-md rounded p-4 lg:p-8">
             <div class="text-center">
-                <a href="{{ route('welcome') }}">
-                    <h2 class="text-4xl text-black font-bold mb-6">Refracgas</h2>
+                <a href="{{ route('welcome') }}" class="hover:no-underline">
+                    <h2 class="text-4xl text-black hover:text-blue-500 font-bold mb-6">Refracgas</h2>
                 </a>
             </div>
 
@@ -125,6 +125,9 @@
                         </ol>
                         <div class="carousel-inner">
                             @foreach ([$p->imagen1, $p->imagen2, $p->imagen3, $p->imagen4] as $index => $image)
+                                @if (!$image)
+                                    @continue
+                                @endif
                                 <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
                                     <img src="{{ asset( 'storage/' . $image) }}" class="d-block w-100" alt="Foto del producto {{ $index + 1 }}">
                                 </div>
@@ -162,11 +165,16 @@
                             @csrf
                             <input type="hidden" name="producto_id" value="{{ $p->id }}">
                             <input type="hidden" name="producto_precio" value="{{ $p->precio }}">
-
+                            @if ($p->stock > 0)
                             <div class="flex items-center">
                                 <input type="number" name="cantidad" placeholder="Cantidad" required min="1" max="{{ $p->stock }}" class="border border-gray-300 px-4 py-2 rounded-l-md w-32">
                                 <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded-r-md hover:bg-green-600 transition duration-300">Agregar al Carrito</button>
                             </div>
+                            @else
+                            <div class="flex items-center">
+                                <span class="text-red-500 text-sm font-bold">No disponible</span>
+                            </div>
+                            @endif
                         </form>
                         @else
                         <h3 class="text-2x2 font-medium text-gray-800">No hay Stock</h3>

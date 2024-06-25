@@ -36,11 +36,15 @@
             </h2>
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 px-4">
                 @foreach ($categoria->productos as $producto)
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <div>
                     <a href="{{ route('producto.show', $producto) }}"
-                        class="bg-white rounded-lg p-4 flex flex-col items-center hover:bg-dbb6ee transition duration-300 ease-in-out transform hover:-translate-y-1">
-                        <div class="relative">
-                            <img src="{{ asset('storage/'. $producto->imagen1) }}" alt="Foto del producto" class="w-full h-40 object-contain">
+                        class="no-underline hover:no-underline bg-white rounded-2xl p-4 flex flex-col items-center transition transform duration-300 ease-in-out hover:-translate-y-1 hover:shadow-2xl">
+                       <div class="relative">
+                            @if (Storage::exists('public/' . $producto->imagen1))
+                                <img src="{{ asset('storage/' . $producto->imagen1) }}" alt="Imagen del producto" class="w-full h-40 object-contain">
+                            @else
+                                <img src="{{ asset('img/logo-olf.png') }}" alt="Imagen por defecto" class="w-full h-40 object-contain">
+                            @endif 
                             <div class="absolute top-2 right-2 py-1 px-1 rounded-full text-xs font-bold
                                 @if ($producto->stock > 0)
                                     bg-green-500 text-white

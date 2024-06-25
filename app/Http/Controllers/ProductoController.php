@@ -139,9 +139,8 @@ class ProductoController extends Controller
         $categorias = categoria::get();
         $marcas = marca::get();
         $p = producto::find($producto->id);
-        $tallas = Talla::all();
         $color = color::all();
-        return view('VistaProductos.edit', compact('p', 'categorias','marcas','tallas','color'));
+        return view('VistaProductos.edit', compact('p', 'categorias','marcas','color'));
     }
 
     /**
@@ -149,53 +148,17 @@ class ProductoController extends Controller
      */
     public function update(Request $request, Producto $producto)
     {
-        $p = Producto::findOrFail($producto->id);
-        $destino = 'img/fotosProductos/';
-        $destinoVideo = 'videos/';
-        $destino3D = 'archivos3D/';
-
-        // Actualizar fotos
-        for ($i = 1; $i <= 3; $i++) {
-            if ($request->hasFile('foto' . $i)) {
-                $file = $request->file('foto' . $i);
-                $fotoNombre = time() . '-' . $file->getClientOriginalName();
-                $file->move($destino, $fotoNombre);
-                $p->{'imagen' . $i} = $destino . $fotoNombre;
-            }
-        }
-
-        // Actualizar video
-        if ($request->hasFile('video')) {
-            $video = $request->file('video');
-            $videoNombre = time() . '-' . $video->getClientOriginalName();
-            $video->move($destinoVideo, $videoNombre);
-            $p->video = $destinoVideo . $videoNombre;
-        }
-
-        // Actualizar archivo 3D
-        if ($request->hasFile('archivo_3d')) {
-            $archivo3D = $request->file('archivo_3d');
-            $nombreArchivo3D = time() . '-' . $archivo3D->getClientOriginalName();
-            $archivo3D->move($destino3D, $nombreArchivo3D);
-            $p->archivo_3d = $destino3D . $nombreArchivo3D;
-        }
-
-        // Actualizar información básica del producto
-        $p->nombre = $request->nombre;
-        $p->descripcion = $request->descripcion;
-        $p->stock_min = $request->stock_min;
-        $p->precio = $request->precio;
-        $p->categoria_id = $request->categoria;
-        $p->es_3d = $request->has('es_3d'); 
-        $p->save();
-
-        // Registrar actividad
-        activity()
-            ->causedBy(auth()->user())
-            ->log('Se actualizó un producto: ' . $p->nombre);
-
-        return redirect()->route('producto.index')->with('success', 'Producto Actualizado con Éxito');
+        $producto->nombre = $request->nombre;
+        $producto->descripcion = $request->descripcion;
+        $producto->precio = $request->precio;
+        $producto->categoria_id = $request->categoria;
+        $producto->color_id = $request->color;
+        $producto->stock_min = $request->stock_min;
+        $producto->save();
+    
+        return redirect()->route('producto.index')->with('success', 'Producto actualizado exitosamente.');
     }
+    
 
 
     /**

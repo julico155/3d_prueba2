@@ -7,7 +7,6 @@
     "require": {
         "php": "^8.1",
         "guzzlehttp/guzzle": "^7.7",
-        "hasnayeen/blade-eva-icons": "^2.0",
         "intervention/image": "^3.7",
         "laravel/framework": "^10.10",
         "laravel/jetstream": "^3.2",

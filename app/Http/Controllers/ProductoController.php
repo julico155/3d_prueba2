@@ -136,10 +136,11 @@ class ProductoController extends Controller
      */
     public function edit(Producto $producto)
     {
+        $p = $producto;
         $categorias = Categoria::get();
         $marcas = Marca::get();
         $color = Color::all();
-        return view('VistaProductos.edit', compact('producto', 'categorias', 'marcas', 'color'));
+        return view('VistaProductos.edit', compact('p', 'categorias', 'marcas', 'color'));
     }
 
     public function update(Request $request, Producto $producto)

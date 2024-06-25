@@ -82,7 +82,7 @@ class PedidoController extends Controller
                 'compra_id' => $compra->id,
                 'producto_id' => $producto->id,
                 'cantidad'  => $cantidad,
-                'proveedor_id' => $proveedor->id,
+                'proveedor_id' => $proveedor ? $proveedor->id : null
         ]);
 
             $detallecompra->save();

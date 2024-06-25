@@ -47,7 +47,7 @@ class IAController extends Controller
                  $originalImage = imagecreatefrompng($imagePath);
      
                  // Redimensionar la imagen original a 256x256 píxeles
-                 $originalImageResized = imagescale($originalImage, 300, 300);
+                 $originalImageResized = imagescale($originalImage, 512, 512);
      
                  // Calcular las posiciones para centrar la imagen redimensionada en el fondo
                  $x = (imagesx($backgroundResized) - imagesx($originalImageResized)) / 2;

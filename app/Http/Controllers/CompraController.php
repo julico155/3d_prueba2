@@ -88,7 +88,7 @@ class CompraController extends Controller
             ];
         // dd($ventas);
         }
-        dd($compras);
+        dd($com);
 
         return view('VistaCompra.nota', compact('compras'));
     }

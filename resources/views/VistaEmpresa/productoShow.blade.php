@@ -261,7 +261,7 @@
             const scene = new BABYLON.Scene(engine);
 
             // Crear la cámara
-            const camera = new BABYLON.ArcRotateCamera("camera", Math.PI / 2, Math.PI / 6, 280, new BABYLON.Vector3(0, 20, 0), scene);
+            const camera = new BABYLON.ArcRotateCamera("camera", Math.PI / 2, Math.PI / 6, 280, new BABYLON.Vector3(0, 100, 0), scene);
             camera.attachControl(canvas, true);
 
             // Crear la luz
